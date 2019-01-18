@@ -19,7 +19,7 @@ namespace WindowsFormsApplication1
         float time1, time2;
         Merridean merridean1 = Merridean.AM, merridean2 = Merridean.PM;
         
-        enum Merridean { PM = 1, AM = -1};
+        enum Merridean { PM = 1, AM = 0};
 
         public Form1()
         {
@@ -38,6 +38,8 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
+           
+            TotalhoursWorkedfortimeperiod = 0;
             ChangeLabel8Text();
         }
 
@@ -48,17 +50,8 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (!check_for_blank_entries()) return;
-            if (!isTimeValid())
-            {
-                label10.Text = "Invalid input";
-                return;
-            }
-            
-            do_time_arithmetic();
             ChangeLabel8Text();
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
            
@@ -67,8 +60,17 @@ namespace WindowsFormsApplication1
             hours2 = Convert.ToInt32(textBox6.Text);
             min1 = Convert.ToInt32(textBox3.Text);
             min2 = Convert.ToInt32(textBox5.Text);
+            if (!check_for_blank_entries()) return;
+            if (!isTimeValid())
+            {
+                label10.Text = "Invalid input";
+                return;
+            }
 
             do_time_arithmetic();
+            ChangeLabel8Text();
+
+            // do_time_arithmetic();
         }
 
         bool check_for_blank_entries()
@@ -98,9 +100,9 @@ namespace WindowsFormsApplication1
                 return false;
             if (hours2 < 1 || hours2 > 12)
                 return false;
-            if (min1 < 1 || min1 > 12)
+            if (min1 < 0 || min1 > 59)
                 return false;
-            if (min1 < 1 || min2 > 12)
+            if (min1 < 0 || min2 > 59)
                 return false;
 
             
@@ -169,13 +171,106 @@ namespace WindowsFormsApplication1
 
         float do_time_arithmetic()
         {
-            time1 = (float)hours1 + (float)min1/60.0f + (12.0f * (int)merridean1);
-            time2 = hours2 + (float)min2 /60.0f + (12.0f * (int)merridean2);
+            if (hours1 == 12 && merridean1 == Merridean.AM && merridean2 == Merridean.AM && hours2 != 12)
+            {
+                
+                hours1 = 0;
+                time1 = (float)hours1 + (float)min1 / 60.0f + (12.0f * (int)merridean1);
+                time2 = hours2 + (float)min2 / 60.0f + (12.0f * (int)merridean2);
+                TotalhoursWorkedfortimeperiod += Math.Abs(time1 - time2);
+            }
 
-            TotalhoursWorkedfortimeperiod += Math.Abs(time1 - time2);
+            else if (hours2 == 12 && merridean2 == Merridean.AM && hours1 != 12)
+            {
+                
+                hours2 = 0;
+                time1 = (float)hours1 + (float)min1 / 60.0f + (12.0f * (int)merridean1);
+                time2 = 24 - hours2 + (float)min2 / 60.0f + (12.0f * (int)merridean2);
+                TotalhoursWorkedfortimeperiod += Math.Abs(time1 - time2);
+            }
 
-            //TotalhoursWorkedfortimeperiod = 
-            return TotalhoursWorkedfortimeperiod;
+
+            else if ( ( merridean2 == Merridean.AM && merridean1 == Merridean.AM && hours2 < hours1)|| (merridean2 == Merridean.AM && merridean1 == Merridean.AM  && hours2 == hours1 && min2 < min1))
+            {
+                if (hours1 == 12) hours1 = 0;
+                if (hours2 == 12) hours2 = 0;
+                time1 = (float)hours1 + (float)min1 / 60.0f + (12.0f * (int)merridean1);
+                time2 = hours2 + (float)min2 / 60.0f + (12.0f * (int)merridean2);
+                TotalhoursWorkedfortimeperiod += 24 - Math.Abs( (time1 - time2));
+            }
+
+            else if ((merridean2 == Merridean.AM && merridean1 == Merridean.AM && hours1 < hours2) || (merridean2 == Merridean.AM && merridean1 == Merridean.AM  && hours2 == hours1 && min2 > min1))
+            {
+                if (hours1 == 12) hours1 = 0;
+                if (hours2 == 12) hours2 = 0;
+                time1 = (float)hours1 + (float)min1 / 60.0f + (12.0f * (int)merridean1);
+                time2 = hours2 + (float)min2 / 60.0f + (12.0f * (int)merridean2);
+                TotalhoursWorkedfortimeperiod +=  Math.Abs((time1 - time2));
+            }
+
+
+            else if ((merridean2 == Merridean.PM && merridean1 == Merridean.PM && hours1 < hours2 && hours2 < 12) || (merridean2 == Merridean.PM && merridean1 == Merridean.PM && hours2 == hours1 && min2 > min1 && hours2 < 12))
+            {
+                if (hours1 == 12) hours1 = 0;
+                if (hours2 == 12) hours2 = 0;
+                time1 = (float)hours1 + (float)min1 / 60.0f + (12.0f * (int)merridean1);
+                time2 = hours2 + (float)min2 / 60.0f + (12.0f * (int)merridean2);
+                TotalhoursWorkedfortimeperiod += Math.Abs((time1 - time2));
+
+
+            }
+
+
+            else if ((merridean2 == Merridean.PM && merridean1 == Merridean.PM && (hours2 > hours1 && hours2 < 12)) || (merridean2 == Merridean.PM && merridean1 == Merridean.PM && (hours2 == hours1 ) && min2 > min1 && hours2 < 12))
+            {
+                if (hours1 == 12) hours1 = 0;
+                if (hours2 == 12) hours2 = 0;
+                time1 = (float)hours1 + (float)min1 / 60.0f + (12.0f * (int)merridean1);
+                time2 = hours2 + (float)min2 / 60.0f + (12.0f * (int)merridean2);
+                TotalhoursWorkedfortimeperiod +=  Math.Abs((time1 - time2));
+            }
+
+            else if ((merridean2 == Merridean.PM && merridean1 == Merridean.PM && (hours2 < hours1 || hours2 == 12 )) || (merridean2 == Merridean.PM && merridean1 == Merridean.PM && hours2 == hours1 && min2 < min1))
+            {
+                if (hours1 == 12) hours1 = 0;
+                if (hours2 == 12) hours2 = 0;
+                time1 = (float)hours1 + (float)min1 / 60.0f + (12.0f * (int)merridean1);
+                time2 = hours2 + (float)min2 / 60.0f + (12.0f * (int)merridean2);
+                TotalhoursWorkedfortimeperiod += 24 -  Math.Abs((time1 - time2));
+            }
+
+            //else if (merridean2 == Merridean.PM && hours2 == 12)
+            //{
+            //    if (hours1 == 12) hours1 = 0;
+            //    if (hours2 == 12) hours2 = 0;
+            //    time1 = (float)hours1 + (float)min1 / 60.0f + (12.0f * (int)merridean1);
+            //    time2 = hours2 + (float)min2 / 60.0f + (12.0f * (int)merridean2);
+            //    TotalhoursWorkedfortimeperiod +=  Math.Abs((time1 - time2));
+            //}
+
+            else if ((merridean2 == Merridean.AM && merridean1 == Merridean.PM))
+            {
+                if (hours1 == 12) hours1 = 0;
+                if (hours2 == 12) hours2 = 0;
+                time1 = (float)hours1 + (float)min1 / 60.0f + (12.0f * (int)merridean1);
+                time2 = hours2 + (float)min2 / 60.0f + (12.0f * (int)merridean2);
+                TotalhoursWorkedfortimeperiod += 24 - Math.Abs(time1 - time2);
+            }
+
+            else
+            {
+                if (hours1 == 12) hours1 = 0;
+                if (hours2 == 12) hours2 = 0;
+                time1 = (float)hours1 + (float)min1 / 60.0f + (12.0f * (int)merridean1);
+                time2 = hours2 + (float)min2 / 60.0f + (12.0f * (int)merridean2);
+                TotalhoursWorkedfortimeperiod += Math.Abs(time1 - time2);
+            }
+
+
+
+
+                //TotalhoursWorkedfortimeperiod = 
+                return TotalhoursWorkedfortimeperiod;
         }
         void ChangeLabel8Text()
         {
