@@ -18,23 +18,32 @@ namespace WindowsFormsApplication1
         FileUtilities file = new FileUtilities();
         string filepath = "C:\\Users\\KMAN\\Documents\\AccumulatorLog";
 
-        long total_time_elapsed_today = 0, total_time_elapsed_to_date = 0;
+        float total_time_elapsed_today = 0, total_time_elapsed_to_date = 0;
 
 
         public RealTimeJobHoursAccumulator()
         {
             InitializeComponent();
-            long value;
+            float value;
             string s = file.read_from_file(filepath);
-            if (s == "" || !long.TryParse(s, out value))
+            if (s == "" || !float.TryParse(s, out value))
             {
                 total_time_elapsed_to_date = 0;
                 return;
             }
+           
+            total_time_elapsed_to_date = Convert.ToSingle(s) * 1000 * 60 * 60;
 
-                total_time_elapsed_to_date = Convert.ToInt32(s);
-           // bool flag = Check_if_New_Day();
+            display_text_boxes();
+            // bool flag = Check_if_New_Day();
             //Thread t = new Thread(new ThreadStart(Check_if_New_Day));
+        }
+
+        void display_text_boxes()
+        {
+            
+            textBox2.Text = Math.Round(((float)total_time_elapsed_today / (1000.00 * 60.00 * 60.00)), 2).ToString();
+            textBox1.Text = Math.Round(((float)total_time_elapsed_to_date / (1000.00 * 60.00 * 60.00)), 2).ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,9 +55,8 @@ namespace WindowsFormsApplication1
         private void button2_Click(object sender, EventArgs e)
         {
             accumulateSum();
-            textBox2.Text = ((float)total_time_elapsed_today / (1000.00 * 60.00) ).ToString();
-            textBox1.Text = ((float)total_time_elapsed_to_date / (1000.00 * 60.00)).ToString();
-            file.write_to_file(filepath, ((float)total_time_elapsed_today / (1000.00 * 60.00)).ToString());
+            display_text_boxes();
+            file.write_to_file(filepath, ((float)total_time_elapsed_to_date / (1000.00 * 60.00 * 60.00)).ToString());
 
         }
 

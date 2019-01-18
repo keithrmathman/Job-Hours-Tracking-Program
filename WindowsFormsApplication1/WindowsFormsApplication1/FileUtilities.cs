@@ -16,8 +16,11 @@ namespace WindowsFormsApplication1
         {
             try
             {
+                File.Create(filepath).Close();
+
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(@filepath, true))
                 {
+                    
                     file.Write(s);
                 }
             }
