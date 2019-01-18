@@ -73,11 +73,22 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            stopwatch.Stop();
+            accumulateSum();
+            display_text_boxes();
+            file.write_to_file(filepath, ((float)total_time_elapsed_to_date / (1000.00 * 60.00 * 60.00)).ToString());
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            file.clear(filepath); //clear all data
+            total_time_elapsed_today = 0;
+            total_time_elapsed_to_date = 0;
+            display_text_boxes();
 
         }
 

@@ -75,12 +75,13 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(152, 279);
+            this.button4.Location = new System.Drawing.Point(152, 282);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(98, 23);
             this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
+            this.button4.Text = "Clear All Hours";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label1
             // 

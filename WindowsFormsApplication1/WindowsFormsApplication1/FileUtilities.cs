@@ -51,5 +51,10 @@ namespace WindowsFormsApplication1
 
             return text;
         }
+
+        public void clear(string filepath)
+        {
+            File.Create(filepath).Close();
+        }
     }
 }
