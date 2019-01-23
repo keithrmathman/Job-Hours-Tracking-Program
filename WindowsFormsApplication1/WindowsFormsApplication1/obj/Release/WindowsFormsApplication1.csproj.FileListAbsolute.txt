@@ -1,0 +1,11 @@
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe.config
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.pdb
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.Form1.resources
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.PromptDialog.resources
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.RealTimeJobHoursAccumulator.resources
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.Resource1.resources
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb

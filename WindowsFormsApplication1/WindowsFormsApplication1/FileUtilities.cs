@@ -14,25 +14,27 @@ namespace WindowsFormsApplication1
 
         public void write_to_file( string filepath, string s) 
         {
-            try
-            {
+           
+                try
+                {
+                File.SetAttributes(filepath, FileAttributes.Normal);
                 File.Create(filepath).Close();
 
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@filepath, true))
-                {
-                    
-                    file.Write(s);
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@filepath, true))
+                    {
+
+                        file.Write(s);
+                    }
                 }
-            }
 
-            catch(FileNotFoundException fex)
-            {
-                //Console.Out.WriteLine("Invalid File Path.");
-                Console.Out.WriteLine(fex);
-            }
+                catch (FileNotFoundException fex)
+                {
+                    //Console.Out.WriteLine("Invalid File Path.");
+                    Console.Out.WriteLine(fex);
+                }
 
-            
-        }
+            }
+        
 
         public string read_from_file(string filepath)
         {
