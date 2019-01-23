@@ -38,6 +38,12 @@ namespace WindowsFormsApplication1
         {
 
             string text ="";
+
+            //if (!Directory.Exists(filepath))
+            //{
+            //    Console.Out.WriteLine("File not Found");
+            //    return "";
+            //}
             try
             {
                  text =  System.IO.File.ReadAllText(@filepath);

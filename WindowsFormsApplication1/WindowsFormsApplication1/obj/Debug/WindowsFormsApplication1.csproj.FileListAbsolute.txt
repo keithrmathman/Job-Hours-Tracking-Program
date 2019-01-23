@@ -17,3 +17,5 @@ C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplicatio
 C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
 C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.RealTimeJobHoursAccumulator.resources
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.PromptDialog.resources
+C:\Users\KMAN\Documents\GitHub\Job-Hours-Tracking-Program\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Resource1.resources

@@ -14,9 +14,11 @@ namespace WindowsFormsApplication1
     {
 
         float TotalhoursWorkedfortimeperiod = 0;
-        List<float> rolling_sum = new List<float>();
+      //  List<float> rolling_sum = new List<float>();
         int hours1 =12, min1= 30, hours2 = 1, min2 = 50;
         float time1, time2;
+        bool logHoursButtonFlag = false;
+
         Merridean merridean1 = Merridean.AM, merridean2 = Merridean.PM;
         
         enum Merridean { PM = 1, AM = 0};
@@ -43,30 +45,51 @@ namespace WindowsFormsApplication1
             ChangeLabel8Text();
         }
 
-        private void Clear()
-        {
-            rolling_sum.Clear();
-        }
+       
 
         private void button2_Click(object sender, EventArgs e)
         {
+            logHoursButtonFlag = true;
             ChangeLabel8Text();
+            this.Close();
         }
+
+
+        bool areValidEntries()
+        {
+            long value;
+
+            if (!long.TryParse(textBox2.Text, out value)) return false;
+            if (!long.TryParse(textBox3.Text, out value)) return false;
+            if (!long.TryParse(textBox5.Text, out value)) return false;
+            if (!long.TryParse(textBox6.Text, out value)) return false;
+
+            return true;
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
            
 
+           
+            if (!check_for_blank_entries()) return;
+            if (!areValidEntries())
+            {
+                label9.Text = "Invalid input";
+                MessageBox.Show("Only numberical values.");
+                return;
+            }
+          
             hours1 = Convert.ToInt32(textBox2.Text);
             hours2 = Convert.ToInt32(textBox6.Text);
             min1 = Convert.ToInt32(textBox3.Text);
             min2 = Convert.ToInt32(textBox5.Text);
-            if (!check_for_blank_entries()) return;
             if (!isTimeValid())
             {
-                label10.Text = "Invalid input";
+                label9.Text = "Invalid input";
                 return;
             }
-
+            label9.ResetText();
             do_time_arithmetic();
             ChangeLabel8Text();
 
@@ -92,6 +115,11 @@ namespace WindowsFormsApplication1
             }
 
             return true;
+        }
+
+        public float getTotalHoursEnteredManually()
+        {
+            return TotalhoursWorkedfortimeperiod;
         }
 
         bool isTimeValid()
@@ -156,8 +184,23 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.FormClosed += new FormClosedEventHandler(Form1_FormClosed);
 
+               MessageBox.Show("Enter your Job hours manually on this form. ");
         }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           if(!logHoursButtonFlag)
+            {
+                TotalhoursWorkedfortimeperiod = 0;
+            }
+        }
+
+        //private void Form1_Load(object sender, EventArgs e)
+        //{
+        //    
+        //}
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -230,7 +273,7 @@ namespace WindowsFormsApplication1
                 TotalhoursWorkedfortimeperiod +=  Math.Abs((time1 - time2));
             }
 
-            else if ((merridean2 == Merridean.PM && merridean1 == Merridean.PM && (hours2 < hours1 || hours2 == 12 )) || (merridean2 == Merridean.PM && merridean1 == Merridean.PM && hours2 == hours1 && min2 < min1))
+            else if ((merridean2 == Merridean.PM && merridean1 == Merridean.PM && (hours2 < hours1 && hours1 < 12) || (hours2 ==  hours1  && min2 < min1) || ( hours2 == 12 && hours1 == 12 && min2 < min1)  ) || (merridean2 == Merridean.PM && merridean1 == Merridean.PM && ( hours2 == 12 && hours1 != 12)))
             {
                 if (hours1 == 12) hours1 = 0;
                 if (hours2 == 12) hours2 = 0;
@@ -265,6 +308,7 @@ namespace WindowsFormsApplication1
                 time2 = hours2 + (float)min2 / 60.0f + (12.0f * (int)merridean2);
                 TotalhoursWorkedfortimeperiod += Math.Abs(time1 - time2);
             }
+
 
 
 
