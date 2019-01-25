@@ -17,8 +17,9 @@ namespace WindowsFormsApplication1
            
                 try
                 {
-                File.SetAttributes(filepath, FileAttributes.Normal);
                 File.Create(filepath).Close();
+                File.SetAttributes(filepath, FileAttributes.Normal);
+                
 
                     using (System.IO.StreamWriter file = new System.IO.StreamWriter(@filepath, true))
                     {

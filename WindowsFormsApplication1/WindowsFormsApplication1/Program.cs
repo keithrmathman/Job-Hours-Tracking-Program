@@ -22,6 +22,7 @@ namespace WindowsFormsApplication1
             Application.SetCompatibleTextRenderingDefault(false);
 
             Application.Run(new RealTimeJobHoursAccumulator());
+            //Application.Run(new Form1());
         }
     }
 }

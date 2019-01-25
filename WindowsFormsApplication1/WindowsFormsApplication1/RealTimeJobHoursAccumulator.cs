@@ -32,8 +32,8 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
-             path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-            filepath = path + "\\bin\\Release\\AccumulatorLog.txt";
+            path = Directory.GetCurrentDirectory();  //GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+            filepath = path + "\\AccumulatorLog.txt";
             float value;
             string s = file.read_from_file(filepath);
             if (s == "" || !float.TryParse(s, out value))
